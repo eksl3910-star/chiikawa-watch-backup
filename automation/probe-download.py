@@ -9,7 +9,7 @@ try:
     with yt_dlp.YoutubeDL({
         'quiet': True, 'no_warnings': True, 'noprogress': True, 'noplaylist': True,
         'socket_timeout': 20, 'retries': 0, 'extractor_retries': 0,
-        'format': '137+140', 'merge_output_format': 'mp4',
+        'format': '137',
         'outtmpl': str(path / '%(id)s.%(ext)s'),
         'js_runtimes': {'node': {'path': shutil.which('node')}},
     }) as downloader:
