@@ -12,6 +12,7 @@ try:
         'format': '137',
         'outtmpl': str(path / '%(id)s.%(ext)s'),
         'js_runtimes': {'node': {'path': shutil.which('node')}},
+        'extractor_args': {'youtube': {'player_client': ['tv', 'web', 'ios', 'android_vr', 'visionos']}},
     }) as downloader:
         downloader.download(['https://www.youtube.com/watch?v=kzAfNg6pAvI'])
     files = list(path.glob('*.mp4'))
