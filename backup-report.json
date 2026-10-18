@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "checkedAt": "2026-10-18T03:47:29.763Z",
+  "checkedAt": "2026-10-18T05:35:19.999Z",
   "total": 248,
   "backedUp": 248,
   "bytes": 2990064931,
   "missing": [],
   "provider": "Cloudflare Seoul + GitHub Actions",
   "lastProbeAt": "2026-10-18T03:47:29.763Z",
-  "probe": true,
-  "publishedThisRun": 1
+  "probe": false,
+  "publishedThisRun": 0
 }
