@@ -1,0 +1,47 @@
+name: Publish new episode backups
+on:
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: Test full server pipeline without replacing an existing backup
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 2,4,6 * * 4,5'
+permissions:
+  contents: write
+concurrency:
+  group: backup-publisher
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install media tools if absent
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+      - name: Publish missing website assets
+        env:
+          BACKUP_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+          BACKUP_PROBE: ${{ inputs.probe || 'false' }}
+        run: python automation/publish.py
+      - name: Save actual backup health report
+        if: always()
+        run: |
+          if [ -f backup-report.json ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add backup-report.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'Update backup health report'
+              git push
+            fi
+          fi
