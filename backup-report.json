@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "checkedAt": "2026-10-23T07:31:54.906Z",
+  "checkedAt": "2026-10-29T08:27:01.930Z",
   "total": 250,
   "backedUp": 250,
   "bytes": 3015152844,
@@ -8,5 +8,5 @@
   "provider": "Cloudflare Seoul + GitHub Actions",
   "lastProbeAt": "2026-10-18T03:47:29.763Z",
   "probe": false,
-  "publishedThisRun": 2
+  "publishedThisRun": 0
 }
